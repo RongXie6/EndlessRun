@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://28t3fuvih8eh"]
+
+[ext_resource type="Script" path="res://gd/attack_head.gd" id="1_w3755"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xmc3w"]
+height = 5.0
+radius = 2.0
+
+[node name="AttackHead" type="Area3D"]
+collision_layer = 4
+collision_mask = 528
+script = ExtResource("1_w3755")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.66397, -1.94451)
+shape = SubResource("CylinderShape3D_xmc3w")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

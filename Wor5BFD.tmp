@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://co8py4xet7we7"]
+
+[ext_resource type="Script" path="res://gd/World.gd" id="1_v0ntq"]
+[ext_resource type="PackedScene" uid="uid://dbj6pm8lf5fc4" path="res://Terreno.tscn" id="2_7edxf"]
+[ext_resource type="PackedScene" uid="uid://bae73wpge4ups" path="res://player_starts.tscn" id="3_jnav4"]
+[ext_resource type="PackedScene" uid="uid://ct3vbpy71j4uh" path="res://Player.tscn" id="5_c2dk4"]
+[ext_resource type="PackedScene" path="res://Scene/GUI.tscn" id="6_dwshk"]
+[ext_resource type="PackedScene" uid="uid://bdqvj878bisbw" path="res://GameOver.tscn" id="6_rdlqx"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_v0ntq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.80599, 0.591929, 0, -0.591929, 0.80599, 0, 2.7518, 2.26647)
+shadow_enabled = true
+
+[node name="Terreno" parent="." instance=ExtResource("2_7edxf")]
+
+[node name="PlayerStarts" parent="." instance=ExtResource("3_jnav4")]
+
+[node name="Player" parent="." instance=ExtResource("5_c2dk4")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 6.34508)
+
+[node name="GameOver" parent="." instance=ExtResource("6_rdlqx")]
+visible = false
+
+[node name="Gui" parent="." instance=ExtResource("6_dwshk")]

@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://dw2ynbbaswdhq"]
+
+[ext_resource type="Texture2D" uid="uid://ca550funq87mn" path="res://modello/w3gt_7g01_210129.jpg" id="1_oho4t"]
+[ext_resource type="Script" path="res://gd/start.gd" id="2_cxa1q"]
+[ext_resource type="Script" path="res://gd/esc.gd" id="3_cibf5"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_j6m7g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nx2i1"]
+font_size = 150
+font_color = Color(0.196078, 0.196078, 0.196078, 1)
+outline_size = 10
+
+[sub_resource type="SystemFont" id="SystemFont_jjs5c"]
+
+[sub_resource type="Theme" id="Theme_k45ep"]
+default_font = SubResource("SystemFont_jjs5c")
+default_font_size = 50
+
+[sub_resource type="SystemFont" id="SystemFont_ynuh1"]
+
+[node name="StartsSreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(575.75, 324.25)
+rotation = 3.14159
+scale = Vector2(1152.5, 649.5)
+mesh = SubResource("QuadMesh_j6m7g")
+texture = ExtResource("1_oho4t")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 81.0
+offset_right = 1093.0
+offset_bottom = 286.0
+text = "RunDeer"
+label_settings = SubResource("LabelSettings_nx2i1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 507.0
+offset_top = 327.0
+offset_right = 632.0
+offset_bottom = 531.0
+theme = SubResource("Theme_k45ep")
+theme_override_constants/separation = 50
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ynuh1")
+text = "Start"
+script = ExtResource("2_cxa1q")
+
+[node name="Esc" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Esc"
+script = ExtResource("3_cibf5")
+
+[connection signal="pressed" from="VBoxContainer/Start" to="VBoxContainer/Start" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/Esc" to="VBoxContainer/Esc" method="_on_pressed"]

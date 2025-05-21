@@ -1,0 +1,70 @@
+[gd_scene load_steps=13 format=3 uid="uid://dbvy2q5ceo8ep"]
+
+[ext_resource type="Script" path="res://gd/terreno.gd" id="1_ftqgh"]
+[ext_resource type="Shader" uid="uid://bo3ixc54tt3dy" path="res://vs_Terreno.tres" id="2_4jmky"]
+[ext_resource type="ArrayMesh" uid="uid://rawuvwf3uqel" path="res://modello/grass.tres" id="2_qjw8h"]
+[ext_resource type="ArrayMesh" uid="uid://dxj33w0s2ql8r" path="res://modello/pine.tres" id="2_yip1w"]
+[ext_resource type="ArrayMesh" uid="uid://dnvi2jwb2m6mc" path="res://modello/入.tres" id="4_b058u"]
+[ext_resource type="ArrayMesh" uid="uid://dihjvs2o8e4kj" path="res://modello/rock2.tres" id="4_oxdd7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nog8x"]
+render_priority = 0
+shader = ExtResource("2_4jmky")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xopyk"]
+material = SubResource("ShaderMaterial_nog8x")
+size = Vector2(80, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dsuv6"]
+size = Vector3(80, 0.05, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oejuy"]
+size = Vector3(1, 14.5653, 19.6414)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mm15"]
+size = Vector3(20, 5, 0.05)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dhds8"]
+
+[node name="Terreno" type="Node3D"]
+script = ExtResource("1_ftqgh")
+meshes = Array[Mesh]([ExtResource("2_yip1w"), ExtResource("2_qjw8h"), ExtResource("4_b058u"), ExtResource("4_oxdd7")])
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_xopyk")
+
+[node name="Floor" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.025, 0)
+shape = SubResource("BoxShape3D_dsuv6")
+
+[node name="Wall1" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.93473, 6.78265, 0.17688)
+shape = SubResource("BoxShape3D_oejuy")
+
+[node name="Wall2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.14754, 6.78265, 0.17688)
+shape = SubResource("BoxShape3D_oejuy")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -9.21165)
+shape = SubResource("BoxShape3D_7mm15")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+aabb = AABB(-10, -10, -10, 20, 20, 20)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.281263, -8.8572)
+visible = false
+mesh = SubResource("PlaneMesh_dhds8")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

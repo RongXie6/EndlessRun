@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4kk0bdkoyggd"]
+
+[ext_resource type="Script" path="res://gd/wood.gd" id="1_5mhet"]
+[ext_resource type="ArrayMesh" uid="uid://dgid7rw3diaw3" path="res://modello/ostoc.tres" id="2_qmw1j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_57fxg"]
+size = Vector3(0.3, 1.8, 0.3)
+
+[node name="Wood" type="StaticBody3D"]
+transform = Transform3D(-0.36633, 0, 2.47301, 0, 2.5, 0, -2.47301, 0, -0.36633, 0, 0, 0)
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_5mhet")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_qmw1j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.978039, -0.146959, 0.147794, 0.146477, -0.0198044, -0.989016, 0.148272, 0.988944, 0.0021566, -0.00103789, 0.00772612, 0.00700669)
+shape = SubResource("BoxShape3D_57fxg")
